@@ -44,6 +44,20 @@ class MemoizedStore implements Store
     }
 
     /**
+     * Set an item into memoized cache without retrieving from the cache itself.
+     *
+     * @param  string  $key
+     * @param  string  $value
+     * @return mixed
+     */
+    public function memoizeOnly($key, $value)
+    {
+        $prefixedKey = $this->prefix($key);
+
+        return $this->cache[$prefixedKey] = $value;
+    }
+
+    /**
      * Retrieve multiple items from the cache by key.
      *
      * Items not found in the cache will have a null value.
